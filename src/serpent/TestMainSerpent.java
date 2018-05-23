@@ -6,17 +6,6 @@ import java.util.Arrays;
 import static serpent.Utils.*;
 
 public class TestMainSerpent {
-
-    /**
-     * Main function, does one of two things:
-     * sets an all-zero-byte key, performs N encryptions of an all-zero-byte plaintext block
-     * or
-     * encrypts the contents of the input file, storing the result in an output file
-     * args either specifies N or
-     * input filename, output filename, key (up to 32 bytes in hex), nonce (integer), and [e]ncrypt or [d]ecrypt
-     */
-
-
     public static void main(String[] args) {
         Serpent serpent = new Serpent();
 
