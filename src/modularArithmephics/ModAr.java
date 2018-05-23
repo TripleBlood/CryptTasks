@@ -48,7 +48,7 @@ public class ModAr {
         BigInteger z;
 
         while (r.compareTo(zero) == 1) {
-            q = m.mod(d);
+            q = m.divide(d);
             z = ((y.add(n.subtract(q.multiply(retVal).mod(n)))).mod(n));
             m = d;
             d = r;

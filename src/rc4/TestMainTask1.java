@@ -9,7 +9,7 @@ public class TestMainTask1 {
 
     public static void main(String[] args) {
 
-        String key = "EgorNyaaaaaaaa";
+        String key = "Ligai Vyacheslav";
         byte[] keyByteArr = key.getBytes();
         RC4 rc4ex = new RC4(keyByteArr);
 
