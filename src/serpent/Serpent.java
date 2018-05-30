@@ -237,16 +237,12 @@ public class Serpent implements BlockCipher {
             {s0, s1, s2, s3, s4, s5, s6, s7};
 
     /**
-     * Perform S-Box manipulation to the given byte array of <TT>blocksize()</TT> length.
-     *
-     * @param data  Input bit sequence
-     * @param round Number of the current round, used to determine which S-Box to use.
+     * Операции над S-box-ами
      */
     private byte[] sBox(byte[] data, int round) {
         byte[] toUse = sBoxes[round % 8];
         byte[] output = new byte[blockSize()];
         for (int i = 0; i < blockSize(); i++) {
-            //Break signed-ness
             int curr = data[i] & 0xFF;
             byte low4 = (byte) (curr >>> 4);
             byte high4 = (byte) (curr & 0x0F);
@@ -278,10 +274,7 @@ public class Serpent implements BlockCipher {
             {is0, is1, is2, is3, is4, is5, is6, is7};
 
     /**
-     * Perform inverse S-Box manipulation to the given byte array of <TT>blocksize()</TT> length.
-     *
-     * @param data  Input bit sequence
-     * @param round Number of the current round, used to determine which inverted S-Box to use.
+     * Обратные операции над блоками
      */
     private byte[] sBoxInv(byte[] data, int round) {
         byte[] toUse = isBoxes[round % 8];

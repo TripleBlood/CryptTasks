@@ -8,8 +8,8 @@ import java.util.Arrays;
 public class Hash6Mode {
 
 
-    public static byte[] createHash(byte[] text, BlockCipher cipher, String h0) {
-        byte[] stringByte = h0.getBytes();
+    public static byte[] createHash(byte[] text, BlockCipher cipher, byte[] h0) {
+        byte[] stringByte = h0;
         byte[] stringByteFull = new byte[text.length];
         int j = 0;
         int ij = 0;

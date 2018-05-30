@@ -9,10 +9,18 @@ import static hash.Hash6Mode.textTo16ByteBlocks;
 public class TestMainTask5 {
     public static void main(String[] args) {
         Serpent serpent = new Serpent();
+        String key = "JackShepardOTP";
+        byte[] keyByteArr = key.getBytes();
+        serpent.setKey(keyByteArr);
+
+        byte[] h0 = {0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00};
 
         String text = "Some kind of text, that I want to make hash from";
         byte[] textByteArr = text.getBytes();
-        byte[] hashArr = Hash6Mode.createHash(textByteArr, serpent, "ILoveMassEffect!");
+        byte[] hashArr = Hash6Mode.createHash(textByteArr, serpent, h0);
 
         System.out.println("Text before using hash-function:");
         System.out.println(text);
