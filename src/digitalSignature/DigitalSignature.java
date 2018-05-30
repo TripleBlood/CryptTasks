@@ -66,8 +66,6 @@ public class DigitalSignature {
         if (leftPart.compareTo(rightPart) == 0) System.out.println("Подпись составлена, ошибок не обнаружено!");
         else {
             System.out.println("Что-то пошло не так");
-            System.out.println(leftPart);
-            System.out.println(rightPart);
         }
     }
 

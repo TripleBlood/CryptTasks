@@ -22,13 +22,28 @@ public class TestMainTask7 {
         System.out.println("Сообщение до шифрования:");
         System.out.println(text);
         System.out.println("——————");
-        ArrayList<byte[]> arrText = EncryptionMode.PFBEncode(text,key,p0);
+        //EncodedText encodedText = EncryptionMode.PFBEncode(text,key,p0);
+        ArrayList<byte[]> arrayList = EncryptionMode.PFBEncode(text,key,p0);
         System.out.println("Сообщение после шифрования:");
-        ByteToHexUtils.printHexArrList(arrText);
+        //ByteToHexUtils.printHexArrList(encodedText.encodedText);
+        ByteToHexUtils.printHexArrList(arrayList);
         System.out.println("——————");
-        System.out.println("Сообщение до дешифрования:");
-        System.out.println(EncryptionMode.PFBDecode(arrText, key, p0));
+        System.out.println("Сообщение после дешифрования:");
+        System.out.println(EncryptionMode.PFBDecode(arrayList, key, p0));
         System.out.println("——————");
+
+        System.out.println("——————");
+        System.out.println("Сообщение до шифрования:");
+        System.out.println(text);
+        System.out.println("——————");
+        EncodedText encodedText = EncryptionMode.PFBEncodeSing(text,key,p0);
+        System.out.println("Сообщение после шифрования:");
+        ByteToHexUtils.printHexArrList(encodedText.encodedText);
+        System.out.println("——————");
+        System.out.println("Сообщение после дешифрования:");
+        System.out.println(EncryptionMode.PFBDecodeSign(encodedText, key, p0));
+        System.out.println("——————");
+
 
     }
 }

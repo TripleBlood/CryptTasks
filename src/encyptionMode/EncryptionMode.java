@@ -1,5 +1,6 @@
 package encyptionMode;
 
+import digitalSignature.DigitalSignature;
 import hash.Hash6Mode;
 import serpent.Serpent;
 
@@ -49,6 +50,8 @@ public class EncryptionMode {
         serpent.setKey(keyByteArr);
 
         ArrayList<byte[]> textPblocks = new ArrayList<byte[]>();
+
+
         byte[] buffer = new byte[16];
         byte[] bufferForEncryptedPBlocks = Arrays.copyOf(p0, 16);
         serpent.encrypt(bufferForEncryptedPBlocks);
@@ -64,6 +67,72 @@ public class EncryptionMode {
         for (int i = 1; i < textPblocks.size(); i++) {
             finalString = finalString.concat(new String(textPblocks.get(i)));
         }
+        return finalString;
+    }
+
+
+
+    /**
+     * Шифрование
+     */
+    public static EncodedText PFBEncodeSing(String text, String key, byte[] p0) {
+        EncodedText encodedText = new EncodedText();
+        // Инициализируем блочный шифр, задём ключ;
+        Serpent serpent = new Serpent();
+        byte[] keyByteArr = key.getBytes();
+        serpent.setKey(keyByteArr);
+
+        byte[] textByteArr = text.getBytes();
+
+
+        // Разбиваем текст на равные блоки по 16 байтов
+        ArrayList<byte[]> textPBlocks = Hash6Mode.textTo16ByteBlocks(textByteArr);
+        ArrayList<byte[]> textCBlocks = new ArrayList<byte[]>();
+        byte[] buffer = new byte[16];
+        byte[] bufferForEncryptedPBlocks = Arrays.copyOf(p0, 16);
+
+        serpent.encrypt(bufferForEncryptedPBlocks);
+
+        for (int i = 0; i < textPBlocks.size(); i++) {
+            buffer = Hash6Mode.xorForArrays(textPBlocks.get(i), bufferForEncryptedPBlocks);
+            textCBlocks.add(Arrays.copyOf(buffer, 16));
+            bufferForEncryptedPBlocks = Arrays.copyOf(textPBlocks.get(i), 16);
+            serpent.encrypt(bufferForEncryptedPBlocks);
+        }
+
+        encodedText.signature = new DigitalSignature(textByteArr, serpent, p0);
+        encodedText.encodedText = textCBlocks;
+        return encodedText;
+    }
+
+    /**
+     * Расшифрование
+     */
+    public static String PFBDecodeSign(EncodedText encodedText, String key, byte[] p0) {
+        Serpent serpent = new Serpent();
+        byte[] keyByteArr = key.getBytes();
+        serpent.setKey(keyByteArr);
+
+        ArrayList<byte[]> textPblocks = new ArrayList<byte[]>();
+        ArrayList<byte[]> textCBlocks = encodedText.encodedText;
+
+
+        byte[] buffer = new byte[16];
+        byte[] bufferForEncryptedPBlocks = Arrays.copyOf(p0, 16);
+        serpent.encrypt(bufferForEncryptedPBlocks);
+
+        for (int i = 0; i < textCBlocks.size(); i++) {
+            buffer = Hash6Mode.xorForArrays(textCBlocks.get(i), bufferForEncryptedPBlocks);
+            textPblocks.add(Arrays.copyOf(buffer, 16));
+            bufferForEncryptedPBlocks = Arrays.copyOf(textPblocks.get(i), 16);
+            serpent.encrypt(bufferForEncryptedPBlocks);
+        }
+        String finalString = new String(textPblocks.get(0));
+
+        for (int i = 1; i < textPblocks.size(); i++) {
+            finalString = finalString.concat(new String(textPblocks.get(i)));
+        }
+
         return finalString;
     }
 }
