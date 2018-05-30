@@ -11,6 +11,9 @@ import java.util.Arrays;
  */
 public class EncryptionMode {
 
+    /**
+     * Шифрование
+     */
     public static ArrayList<byte[]> PFBEncode(String text, String key, byte[] p0) {
 
         // Инициализируем блочный шифр, задём ключ;
@@ -26,7 +29,6 @@ public class EncryptionMode {
         byte[] buffer = new byte[16];
         byte[] bufferForEncryptedPBlocks = Arrays.copyOf(p0, 16);
 
-        //
         serpent.encrypt(bufferForEncryptedPBlocks);
 
         for (int i = 0; i < textPBlocks.size(); i++) {
@@ -38,6 +40,9 @@ public class EncryptionMode {
         return textCBlocks;
     }
 
+    /**
+     * Расшифрование
+     */
     public static String PFBDecode(ArrayList<byte[]> textCBlocks, String key, byte[] p0) {
         Serpent serpent = new Serpent();
         byte[] keyByteArr = key.getBytes();
@@ -46,8 +51,6 @@ public class EncryptionMode {
         ArrayList<byte[]> textPblocks = new ArrayList<byte[]>();
         byte[] buffer = new byte[16];
         byte[] bufferForEncryptedPBlocks = Arrays.copyOf(p0, 16);
-
-        //
         serpent.encrypt(bufferForEncryptedPBlocks);
 
         for (int i = 0; i < textCBlocks.size(); i++) {

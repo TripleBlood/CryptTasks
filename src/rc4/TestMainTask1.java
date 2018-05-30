@@ -1,6 +1,6 @@
 package rc4;
 
-import Utils.Utils;
+import Util.ByteToHexUtils;
 import rc4.utils.ElementWithSubstDet;
 import rc4.utils.PseudoRndShuffle;
 
@@ -16,10 +16,10 @@ public class TestMainTask1 {
         RC4 rc4ex = new RC4(keyByteArr);
 
         System.out.println("Получение случачайного байта:");
-        System.out.println(Utils.byteToHex(rc4ex.getRndByte()));;
+        System.out.println(ByteToHexUtils.byteToHex(rc4ex.getRndByte()));;
         System.out.println("——————");
         System.out.println("Получение случачайного байта в диапозоне от 0 до 200");
-        System.out.println(Utils.byteToHex(rc4ex.getRndByteInRange(200)));
+        System.out.println(ByteToHexUtils.byteToHex(rc4ex.getRndByteInRange(200)));
         System.out.println("——————");
 
         ArrayList<ElementWithSubstDet> array = new PseudoRndShuffle().buildSubstitution(20, rc4ex);

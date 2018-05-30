@@ -1,9 +1,11 @@
-package Utils;
+package Util;
 
 import java.util.ArrayList;
 
-public class Utils {
-
+public class ByteToHexUtils {
+    /**
+     * Функция, преобразующая массив байтов в строковый шестнадцатиричный вид
+     */
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     public static String bytesToHex(byte[] bytes) {
@@ -16,6 +18,9 @@ public class Utils {
         return new String(hexChars);
     }
 
+    /**
+     * Функция, преобразующая ArrayList массивов байтов в строковый шестнадцатиричный вид
+     */
     public static void printHexArrList(ArrayList<byte[]> list) {
         String finalString = bytesToHex(list.get(0));
 
@@ -27,6 +32,9 @@ public class Utils {
         System.out.println("");
     }
 
+    /**
+     * Функция, преобразующая байт в строковый шестнадцатиричный вид
+     */
     public static String byteToHex(byte initByte){
         char[] hexChars = new char[2];
         int v = initByte & 0xFF;

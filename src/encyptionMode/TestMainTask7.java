@@ -1,6 +1,6 @@
 package encyptionMode;
 
-import Utils.Utils;
+import Util.ByteToHexUtils;
 import serpent.Serpent;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class TestMainTask7 {
         System.out.println("——————");
         ArrayList<byte[]> arrText = EncryptionMode.PFBEncode(text,key,p0);
         System.out.println("Сообщение после шифрования:");
-        Utils.printHexArrList(arrText);
+        ByteToHexUtils.printHexArrList(arrText);
         System.out.println("——————");
         System.out.println("Сообщение до дешифрования:");
         System.out.println(EncryptionMode.PFBDecode(arrText, key, p0));

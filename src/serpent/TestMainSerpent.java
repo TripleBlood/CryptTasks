@@ -1,5 +1,7 @@
 package serpent;
 
+import Util.ByteToHexUtils;
+
 import java.io.*;
 import java.util.Arrays;
 
@@ -15,31 +17,27 @@ public class TestMainSerpent {
 
         String text = "ILoveMassEffect!";
         byte[] textByteArr = text.getBytes();
-        for (int i = 0; i < textByteArr.length; i++) {
-            System.out.print(textByteArr[i] + "   ");
-        }
-        System.out.println(" ");
-        text = new String(textByteArr);
+
+        System.out.println("Сообщение до шифрования:");
         System.out.println(text);
+        System.out.println("Сообщение до шифрования в шестнадцатиричном виде:");
+        System.out.println(ByteToHexUtils.bytesToHex(textByteArr));
+        System.out.println("——————");
 
         //Шифрование
         serpent.encrypt(textByteArr);
-        for (int i = 0; i < textByteArr.length; i++) {
-            System.out.print(textByteArr[i] + "   ");
-        }
-        System.out.println(" ");
-        text = new String(textByteArr);
-        System.out.println(text);
+        System.out.println("Сообщение после шифрования в шестнадцатиричном виде:");
+        System.out.println(ByteToHexUtils.bytesToHex(textByteArr));
+        System.out.println("——————");
 
         //Расшифрование
         serpent.decrypt(textByteArr);
-        for (int i = 0; i < textByteArr.length; i++) {
-            System.out.print(textByteArr[i] + "   ");
-        }
-        System.out.println(" ");
-
         text = new String(textByteArr);
+        System.out.println("Сообщение после расшифрования в шестнадцатиричном виде:");
+        System.out.println(ByteToHexUtils.bytesToHex(textByteArr));
+        System.out.println("Сообщение после расшифрования:");
         System.out.println(text);
+        System.out.println("——————");
         System.out.println("Key: " + key);
     }
 }

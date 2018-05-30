@@ -7,7 +7,13 @@ import java.util.Arrays;
 
 public class Hash6Mode {
 
-
+    /**
+     *
+     * @param text - Входной текст
+     * @param cipher - Шифр
+     * @param h0 - Инициальизирующий вектор
+     * @return - Возвращает хэш от входного текста
+     */
     public static byte[] createHash(byte[] text, BlockCipher cipher, byte[] h0) {
         byte[] stringByte = h0;
         byte[] stringByteFull = new byte[text.length];
@@ -38,6 +44,10 @@ public class Hash6Mode {
         return h;
     }
 
+    /**
+     *
+     * @param text - Переводит массив байтов в ArrayList массивов из 16-ти байтов
+     */
     public static ArrayList<byte[]> textTo16ByteBlocks(byte[] text) {
         int zero = 0;
         ArrayList<byte[]> list = new ArrayList();
@@ -66,6 +76,9 @@ public class Hash6Mode {
         return list;
     }
 
+    /**
+     * @return - array1 xor array2
+     */
     public static byte[] xorForArrays(byte[] array1, byte[] array2) {
         byte[] buffer = new byte[16];
         for (int i = 0; i < array1.length; i++) {

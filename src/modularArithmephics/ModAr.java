@@ -36,6 +36,7 @@ public class ModAr {
         return retVal;
     }
 
+    // Поиск мультипликативно-обратного элемента
     public static BigInteger MultInv(BigInteger num, BigInteger n) {
         BigInteger zero = new BigInteger("0");
 
